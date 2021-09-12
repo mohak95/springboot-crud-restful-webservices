@@ -71,5 +71,14 @@ public class UserController {
 		return ResponseEntity.ok().build();
 	}
 	
+	@DeleteMapping("test/{id}")
+	public ResponseEntity<User> deleteUser2(@PathVariable("id") int userId) {
+		
+		User existingUser =  this.userRepo.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User not found with id :" + userId));
+
+		this.userRepo.delete(existingUser);
+		return ResponseEntity.ok().build();
+	}
 	
 }
